@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">ComPair</string>
+    <string name="open">Open Navigation</string>
+    <string name="close">Close Navigation</string>
 </resources>
