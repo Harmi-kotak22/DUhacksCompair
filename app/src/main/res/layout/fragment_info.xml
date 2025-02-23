@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#000"
+    android:padding="16dp">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Welcome to ComPair"
+            android:textColor="#FFF"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingBottom="10dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="ComPair is an advanced e-commerce product comparison tool that helps you find the best prices, specifications, and deals from multiple online stores."
+            android:textColor="#CCC"
+            android:textSize="16sp"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Key Features:"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="✔ Compare prices from top e-commerce platforms.\n✔ Get detailed product specifications.\n✔ View customer reviews and ratings.\n✔ Filter and sort products based on preferences.\n✔ Save your favorite products for later.\n✔ Get real-time price drop alerts."
+            android:textColor="#CCC"
+            android:textSize="16sp"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="How ComPair Works:"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1️⃣ Search for the product you want to buy.\n2️⃣ Compare prices from multiple e-commerce websites.\n3️⃣ Check product details, reviews, and ratings.\n4️⃣ Choose the best deal and visit the store to purchase.\n5️⃣ Save products to track their price changes over time."
+            android:textColor="#CCC"
+            android:textSize="16sp"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Why Choose ComPair?"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:paddingBottom="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="💰 Save money by finding the lowest price.\n⏳ Save time by viewing all details in one place.\n⚡ Make smarter shopping decisions with reviews and ratings."
+            android:textColor="#CCC"
+            android:textSize="16sp"
+            android:paddingBottom="20dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Happy Shopping with ComPair!"
+            android:textColor="#FFF"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:gravity="center"
+            android:paddingTop="10dp"
+            android:paddingBottom="20dp"/>
+    </LinearLayout>
+
+</ScrollView>
