@@ -27,13 +27,25 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Product product = items.get(position);
+
+        // ✅ Prevent NullPointerException
+        if (product == null) {
+            return;
+        }
+
         holder.textView.setText(product.getName());
-        holder.imageView.setImageResource(product.getImageResId());
+
+        // ✅ Check and set image safely
+        if (product.getImageResId() != 0) {
+            holder.imageView.setImageResource(product.getImageResId());
+        } else {
+            holder.imageView.setImageResource(R.drawable.compair); // Use a default image if needed
+        }
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return (items != null) ? items.size() : 0;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -42,8 +54,8 @@ public class DashboardAdapter extends RecyclerView.Adapter<DashboardAdapter.View
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            textView = itemView.findViewById(R.id.productName);
-            imageView = itemView.findViewById(R.id.productImage);
+            textView = itemView.findViewById(R.id.product_name);
+            imageView = itemView.findViewById(R.id.product_image);
         }
     }
 }

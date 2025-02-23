@@ -1,6 +1,7 @@
 {
   "project_info": {
     "project_number": "546931047148",
+    "firebase_url": "https://test-2c25e-default-rtdb.asia-southeast1.firebasedatabase.app",
     "project_id": "test-2c25e",
     "storage_bucket": "test-2c25e.firebasestorage.app"
   },
@@ -12,7 +13,28 @@
           "package_name": "com.example.compair"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "546931047148-8891dd67je8qdmv7in0h7toigmttnml2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.compair",
+            "certificate_hash": "bc8a70ee2ea0b90dfb7bd45e2349772b79f8b032"
+          }
+        },
+        {
+          "client_id": "546931047148-bvl6itd2qp24fs14oid7p9ss8eg192jr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.compair",
+            "certificate_hash": "d93fdd0400cd8ca76aef121a0d0c0194c2312dad"
+          }
+        },
+        {
+          "client_id": "546931047148-1pj71bu7ah9t9konk6j053t4cq806at8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyCOloPI1cu1I_1ld5j0Knbbadeatzxtpuk"
@@ -20,7 +42,12 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "546931047148-1pj71bu7ah9t9konk6j053t4cq806at8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
         }
       }
     }

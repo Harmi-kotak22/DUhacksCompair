@@ -1,123 +1,174 @@
 package com.example.compair;
-
 import android.content.Intent;
+import android.content.res.Configuration;
+import android.os.Build;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.MenuItem;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.SearchView;
-import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.content.ContextCompat;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationView;
-import java.util.ArrayList;
-import java.util.List;
+import com.google.android.material.navigation.NavigationView;
 
 public class home extends AppCompatActivity {
 
-    private DrawerLayout drawerLayout;
-    private RecyclerView recyclerView;
-    private SearchView searchView;
-    private DashboardAdapter adapter;
-    private List<Product> itemList;
-    private List<Product> filteredList;
     private BottomNavigationView bottomNavigationView;
+    private DrawerLayout drawerLayout;
+    private NavigationView navigationView;
+    private Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        // Apply dark theme if system is in dark mode
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        if (nightModeFlags == Configuration.UI_MODE_NIGHT_YES) {
+            setTheme(R.style.Theme_Compair_Dark);
+        } else {
+            setTheme(R.style.Theme_Compair_Light);
+        }
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
         // Set up Toolbar
-        Toolbar toolbar = findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(true);
+        applyDynamicTheme(toolbar);
 
-        // Set up Navigation Drawer
+        // Initialize DrawerLayout and NavigationView
         drawerLayout = findViewById(R.id.drawer_layout);
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open, R.string.close);
-        drawerLayout.addDrawerListener(toggle);
-        toggle.syncState();
+        navigationView = findViewById(R.id.nav_view);
+        applyDynamicTheme(navigationView);
+
+        // Ensure the drawer opens from the right side
+        toolbar.setNavigationOnClickListener(v -> {
+            if (drawerLayout.isDrawerOpen(GravityCompat.END)) {
+                drawerLayout.closeDrawer(GravityCompat.END);
+            } else {
+                drawerLayout.openDrawer(GravityCompat.END);
+            }
+        });
+
+        // Change status bar color
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            Window window = getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor(ContextCompat.getColor(this, R.color.status_bar_color));
+        }
+
+        // Initialize Bottom Navigation
+        bottomNavigationView = findViewById(R.id.bottom_navigation);
+        applyDynamicTheme(bottomNavigationView);
+
+        // Load HomeFragment by default
+        loadFragment(new HomeFragment(), false);
+        toolbar.setTitle("Home");
+
+        // Bottom Navigation Handling
+        bottomNavigationView.setOnItemSelectedListener(this::onBottomNavItemSelected);
 
         navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                drawerLayout.closeDrawer(GravityCompat.START);
+                int id = item.getItemId();
+
+                if (id == R.id.nav_home) {
+                    loadFragment(new HomeFragment(),true);  // Load Fragment
+                } else if (id == R.id.nav_search) {
+                    loadFragment(new ProfileFragment(),true);  // Load Fragment
+                }   else if (id == R.id.nav_settings) {
+                    // Open an Activity instead of loading a Fragment
+                    Intent intent = new Intent(home.this, SettingsActivity.class);
+                    startActivity(intent);
+                }
+                else if (id == R.id.nav_logout) {
+                    // Open an Activity instead of loading a Fragment
+                    Intent intent = new Intent(home.this, login.class);
+                    startActivity(intent);
+                }
+
+
+                // Close the drawer after selection
+                drawerLayout.closeDrawer(GravityCompat.END);
                 return true;
             }
         });
-
-        // Set up Search View
-        searchView = findViewById(R.id.searchView);
-
-        // Set up RecyclerView
-        recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new GridLayoutManager(this, 2)); // 2 Columns
-
-        // Sample Data
-        itemList = new ArrayList<>();
-        itemList.add(new Product("Grocery", R.drawable.grocery));
-        itemList.add(new Product("Electronic", R.drawable.electronics));
-        itemList.add(new Product("Toys", R.drawable.toys));
-        itemList.add(new Product("Fashion", R.drawable.fashion));
-        itemList.add(new Product("Shoes", R.drawable.shoe   ));
-
-        filteredList = new ArrayList<>(itemList);
-        adapter = new DashboardAdapter(filteredList);
-        recyclerView.setAdapter(adapter);
-
-        // Search filtering
-        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                filter(query);
-                return false;
-            }
-
-            @Override
-            public boolean onQueryTextChange(String newText) {
-                filter(newText);
-                return false;
-            }
-        });
-
-        // Bottom Navigation
-        bottomNavigationView = findViewById(R.id.bottom_navigation);
-       /* bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.nav_home:
-                        return true;
-
-                    case R.id.nav_cart:
-                        startActivity(new Intent(home.this, CartActivity.class));
-                        return true;
-
-                    case R.id.nav_profile:
-                        startActivity(new Intent(home.this, ProfileActivity.class));
-                        return true;
-                }
-                return false;
-            }
-        });*/
     }
 
-    private void filter(String text) {
-        filteredList.clear();
-        if (text.isEmpty()) {
-            filteredList.addAll(itemList);
+    private boolean onBottomNavItemSelected(@NonNull MenuItem item) {
+        int itemId = item.getItemId();
+        applyScaleAnimation(itemId);
+
+        if (itemId == R.id.nav_home) {
+            loadFragment(new HomeFragment(), false);
+            toolbar.setTitle("Home");
+            return true;
+        } else if (itemId == R.id.nav_search) {
+            loadFragment(new SearchFragment(), true);
+            toolbar.setTitle("Search Products");
+            return true;
+        } else if (itemId == R.id.nav_profile) {
+            loadFragment(new ProfileFragment(), true);
+            toolbar.setTitle("Profile");
+            return true;
+        }
+        return false;
+    }
+
+
+
+    private void loadFragment(Fragment fragment, boolean addToBackStack) {
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        transaction.replace(R.id.fragment_container, fragment);
+
+        if (addToBackStack) {
+            transaction.addToBackStack(null);
         } else {
-            for (Product item : itemList) {
-                if (item.getName().toLowerCase().contains(text.toLowerCase())) {
-                    filteredList.add(item);
+            fragmentManager.popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+        }
+
+        transaction.commit();
+    }
+
+    private void applyScaleAnimation(int selectedItemId) {
+        for (int i = 0; i < bottomNavigationView.getMenu().size(); i++) {
+            MenuItem menuItem = bottomNavigationView.getMenu().getItem(i);
+            View itemView = bottomNavigationView.findViewById(menuItem.getItemId());
+
+            if (itemView != null) {
+                if (menuItem.getItemId() == selectedItemId) {
+                    itemView.animate().scaleX(1.2f).scaleY(1.2f).setDuration(200).start();
+                } else {
+                    itemView.animate().scaleX(1f).scaleY(1f).setDuration(200).start();
                 }
             }
         }
-        adapter.notifyDataSetChanged();
+    }
+
+    private void applyDynamicTheme(View view) {
+        int nightModeFlags = getResources().getConfiguration().uiMode & Configuration.UI_MODE_NIGHT_MASK;
+        int backgroundColor = (nightModeFlags == Configuration.UI_MODE_NIGHT_YES)
+                ? ContextCompat.getColor(this, R.color.darkBackground)
+                : ContextCompat.getColor(this, R.color.lightBackground);
+
+        view.setBackgroundColor(backgroundColor);
+
+        // Apply text color for toolbar title
+        if (view instanceof Toolbar) {
+            ((Toolbar) view).setTitleTextColor(ContextCompat.getColor(this, R.color.white));
+        }
     }
 }

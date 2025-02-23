@@ -2,4 +2,28 @@
     <string name="app_name">ComPair</string>
     <string name="open">Open Navigation</string>
     <string name="close">Close Navigation</string>
+    <string name="navigation_drawer_open">Open Navigation Drawer</string>
+    <string name="navigation_drawer_close">Close Navigation Drawer</string>
+
+    <!-- Sort Options -->
+    <string-array name="sort_options">
+        <item>Relevance</item>
+        <item>Price: Low to High</item>
+        <item>Price: High to Low</item>
+    </string-array>
+
+    <!-- Website Options -->
+    <string-array name="website_options">
+        <item>All</item>
+        <item>Amazon</item>
+        <item>Flipkart</item>
+        <item>Meesho</item>
+    </string-array>
+
+    <string-array name="website_filter_options">
+        <item>All Websites</item>
+        <item>Amazon</item>
+        <item>Flipkart</item>
+        <item>Meesho</item>
+    </string-array>
 </resources>

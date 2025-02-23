@@ -7,6 +7,7 @@
     android:layout_height="match_parent"
     tools:context=".home">
 
+    <!-- Main Content Area -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -17,43 +18,59 @@
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:title="Home" />
+            android:background="@color/custom_toolbar_color"
+            android:titleTextColor="@color/toolbar_title_color"
+            app:title="ComPair"
+            app:titleTextAppearance="@style/ToolbarTitleStyle" >
+            <Button
+                android:id="@+id/open_drawer_button"
+                android:layout_width="40dp"
+                android:layout_height="40dp"
+                android:layout_gravity="end"
+                android:padding="8dp"
+                app:tint="@color/white"
+                android:backgroundTint="@color/white"
+                android:background="@drawable/ic_menu"
+                android:scaleType="centerInside"/>
 
-        <!-- SearchView -->
-        <androidx.appcompat.widget.SearchView
-            android:id="@+id/searchView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:queryHint="Search items..."
-            android:iconifiedByDefault="false" />
+        </androidx.appcompat.widget.Toolbar>
 
-        <!-- RecyclerView -->
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+        <!-- Fragment Container (Full-Screen Priority) -->
+
+        <FrameLayout
+            android:id="@+id/fragment_container"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
-            android:padding="10dp"
-            android:scrollbars="vertical" />
+            android:background="@android:color/white" />
 
-        <!-- Bottom Navigation Bar -->
+        <!-- Bottom Navigation -->
         <com.google.android.material.bottomnavigation.BottomNavigationView
             android:id="@+id/bottom_navigation"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?android:attr/windowBackground"
+            android:background="@android:color/white"
+            app:labelVisibilityMode="labeled"
             app:menu="@menu/bottom_nav_menu" />
 
     </LinearLayout>
 
-    <!-- Navigation Drawer -->
+    <!-- Right-Side Navigation Drawer (Can Include RecyclerView for List Selection) -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_gravity="start"
+        android:layout_gravity="end"
         app:headerLayout="@layout/nav_header"
-        app:menu="@menu/drawer_menu" />
+        app:menu="@menu/drawer_menu">
+
+        <!-- RecyclerView Inside Drawer (Optional) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:scrollbars="vertical" />
+    </com.google.android.material.navigation.NavigationView>
 
 </androidx.drawerlayout.widget.DrawerLayout>

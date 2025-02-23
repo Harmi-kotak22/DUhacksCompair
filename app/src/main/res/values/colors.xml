@@ -2,4 +2,51 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="green">#4CAF50</color>
+    <color name="orange">#FF9800</color>
+
+    <!-- ✅ Light Theme Colors -->
+    <color name="lightPrimary">#3F51B5</color>
+    <color name="lightPrimaryVariant">#303F9F</color>
+    <color name="lightAccent">#FF6200</color>
+    <color name="lightBackground">#F5F5F5</color>
+        <color name="background">#FFFFFF</color>
+
+    <!-- ✅ Dark Theme Colors -->
+    <color name="darkPrimary">#BB86FC</color> <!-- Purple Shade -->
+    <color name="darkPrimaryVariant">#3700B3</color>
+    <color name="darkAccent">#03DAC5</color>
+    <color name="darkBackground">#121212</color>
+
+    <!-- ✅ Toolbar and Status Bar -->
+    <color name="toolbar_color">#121212</color>
+    <color name="status_bar_color">#121212</color>
+    <color name="custom_toolbar_color">#6200EE</color>
+    <color name="toolbar_title_color">#FFFFFF</color>  <!-- ✅ Added missing color -->
+
+    <!-- ✅ Bottom Navigation -->
+    <color name="bottom_nav_color">#000000</color>
+    <color name="bottom_nav_item_color">#FFFFFF</color>
+    <color name="bottom_nav_selected">#000000</color>
+    <color name="bottom_nav_unselected">#FFFFFF</color>
+    <color name="bottom_nav_background">#FFFFFF</color>
+    <color name="bottom_nav_hover">#CCCCCC</color>
+
+    <!-- ✅ Extra UI Colors -->
+    <color name="divider">#EEEEEE</color>
+    <color name="errorRed">#D32F2F</color>
+    <color name="successGreen">#4CAF50</color>
+    <color name="warningYellow">#FFC107</color>
+    <color name="infoBlue">#2196F3</color>
+
+    <!-- ✅ Selected & Unselected Item Colors -->
+    <color name="selected_item_color">#FF9800</color>
+    <color name="unselected_item_color">#757575</color>
+
+    <color name="signup_background">#F5F5F5</color>  <!-- Light gray, change as needed -->
+    <color name="fragment_background">#F5F5DC</color>
+    <color name="fragmentsearchbackground">#F5F5DC</color>
+    <color name="blue_500">#6B73FF</color>
+    <color name="open_drawer_button">#FFFFFF</color>
+
 </resources>
